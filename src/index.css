@@ -23,7 +23,7 @@ code {
   min-height: 90vh;
   min-width: 40vw;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 30vh 1fr 1fr;
   grid-template-columns: 60% 40%;
   grid-template-areas:
     'title title'
