@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 const Title = props => {
-  const [title, setTitle] = useState('Steerpike');
+  const header = useInput('Steerpike');
+  const subHeader = useInput('Learning React');
   const [hovered, setHovered] = useState(false);
-  const getTitleInput = e => setTitle(e.target.value);
 
   const hoverHandler = () => (hovered ? setHovered(false) : setHovered(true));
 
@@ -13,31 +13,44 @@ const Title = props => {
       <StyledImageHolder />
       <StyledHeaderModal>
         {hovered ? (
-          <StyledMainInput
-            onMouseLeave={hoverHandler}
-            value={title}
-            onChange={getTitleInput}
-          />
+          <StyledHeaderInput {...header} onMouseLeave={hoverHandler} />
         ) : (
           <StyledMainHeader onMouseEnter={hoverHandler}>
-            {title}
+            {header['value']}
           </StyledMainHeader>
+        )}
+        {hovered ? (
+          <StyledSubHeaderInput {...subHeader} onMouseLeave={hoverHandler} />
+        ) : (
+          <StyledSubHeader onMouseEnter={hoverHandler}>
+            {subHeader['value']}
+          </StyledSubHeader>
         )}
       </StyledHeaderModal>
     </StyledTitle>
   );
 };
 
+const useInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = e => setValue(e.target.value);
+
+  return {
+    value,
+    onChange: handleChange,
+  };
+};
+
 const StyledTitle = styled.div`
   grid-area: title;
-  background-color: red;
   display: grid;
   grid-template-columns: 10% 17% 17% 1fr;
   grid-template-rows: 5% 1fr 5%;
 `;
 
 const StyledHeaderModal = styled.div`
-  background-color: purple;
+  background-color: ${props => props.theme.main};
   grid-area: 2 / 3 / 3 /5;
   height: 55%;
   align-self: center;
@@ -62,12 +75,24 @@ const StyledMainHeader = styled.h1`
   text-align: start;
 `;
 
-const StyledMainInput = styled.input`
+const StyledSubHeader = styled.h2`
+  padding: 0;
+  margin: 0;
+  color: white;
+  grid-area: 3 / 2 / 4 / 3;
+  text-align: start;
+`;
+
+const StyledHeaderInput = styled.input`
   color: white;
   grid-area: 2 / 2 / 3 / 3;
   height: 50%;
   text-align: start;
   background-color: black;
+`;
+
+const StyledSubHeaderInput = styled(StyledHeaderInput)`
+  grid-area: 3 / 2 / 4 /3;
 `;
 
 export default Title;
