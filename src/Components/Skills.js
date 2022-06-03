@@ -49,7 +49,6 @@ const Skills = () => {
 
 const SkillsContainer = styled.div`
   display: grid;
-  border: 1px solid black;
   grid-template-rows: 20% 1fr;
   grid-template-columns: 1fr;
   grid-area: 3 / 2 / 4 / 3;
@@ -84,7 +83,7 @@ const AddSkillButton = styled.button`
   border-radius: 15px;
   font-weight: 700;
   color: #fff;
-  padding: 5px 10px;
+  padding: 6px 10px;
   position: absolute;
   top: 3%;
   left: 5%;
