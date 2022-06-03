@@ -18,9 +18,7 @@ const Contact = () => {
   const [addressHover, isAddressHovered] = useHover(false);
   const [webHover, isWebHovered] = useHover(false);
   const [phoneHover, isPhoneHovered] = useHover(false);
-
   const themeContext = useContext(ThemeContext);
-  console.log(themeContext);
 
   return (
     <StyledContactContainer>

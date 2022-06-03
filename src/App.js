@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Title from './Components/Title';
 import Contact from './Components/Contact';
-import SKills from './Components/Skills';
+import Skills from './Components/Skills';
 
 function App() {
   const [theme, setTheme] = useState({
@@ -18,6 +18,7 @@ function App() {
       let index;
       const themeLibrary = [
         { main: '#94a3b8', secondary: '#4b5563' },
+        { main: '#0f766e', secondary: '#701a75' },
         { main: '#737373', secondary: '#44403c' },
         { main: '#f87171', secondary: '#7f1d1d' },
         { main: '#fb923c', secondary: '#9a3412' },
@@ -48,7 +49,7 @@ function App() {
         <Title />
         <Partition />
         <Contact />
-        <SKills />
+        <Skills />
       </ThemeProvider>
     </div>
   );
