@@ -3,6 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Title from './Components/Title';
+import Contact from './Components/Contact';
 
 function App() {
   const [theme, setTheme] = useState({
@@ -27,8 +28,8 @@ function App() {
         { main: '#e879f9', secondary: '#701a75' },
         { main: '#fda4af', secondary: '#9f1239' },
       ];
-      themeLibrary.map((obj, arrayIndex) =>
-        obj.main === theme.main ? (index = arrayIndex) : obj
+      themeLibrary.map((themes, arrayIndex) =>
+        themes.main === theme.main ? (index = arrayIndex) : themes
       );
       if (index === themeLibrary.length - 1) index = -1;
       setTheme({
@@ -44,13 +45,14 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <Title />
-        <RightPartition />
+        <Partition />
+        <Contact />
       </ThemeProvider>
     </div>
   );
 }
 
-const RightPartition = styled.div`
+const Partition = styled.div`
   grid-area: 1 / 2 / 4 / 3;
   background-color: ${props => props.theme.secondary};
   z-index: -20;

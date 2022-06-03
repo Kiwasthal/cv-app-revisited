@@ -71,8 +71,10 @@ const StyledMainHeader = styled.h1`
   padding: 0;
   margin: 0;
   color: white;
+  font-size: 48px;
   grid-area: 2 / 2 / 3 / 3;
   text-align: start;
+  align-self: flex-end;
 `;
 
 const StyledSubHeader = styled.h2`
