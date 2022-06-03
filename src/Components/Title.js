@@ -50,6 +50,7 @@ const StyledTitle = styled.div`
 `;
 
 const StyledHeaderModal = styled.div`
+  transition: all 0.2s ease-in;
   background-color: ${props => props.theme.main};
   grid-area: 2 / 3 / 3 /5;
   height: 55%;
@@ -60,6 +61,7 @@ const StyledHeaderModal = styled.div`
 `;
 
 const StyledImageHolder = styled.div`
+  transition: all 0.2s ease-in;
   border-radius: 200px;
   grid-area: 2 / 2 / 3 / 4;
   border: 10px solid black;

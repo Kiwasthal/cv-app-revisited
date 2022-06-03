@@ -34,6 +34,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '40px',
+              transition: 'all 0.2s ease-in',
               color: `${themeContext.main}`,
             }}
           />
@@ -57,6 +58,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '40px',
+              transition: 'all 0.2s ease-in',
               color: `${themeContext.main}`,
             }}
           />
@@ -80,6 +82,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '35px',
+              transition: 'all 0.2s ease-in',
               color: `${themeContext.main}`,
             }}
           />
@@ -145,6 +148,7 @@ const StyledContactContainer = styled.div`
 `;
 
 const StyledContactHeader = styled.h3`
+  transition: all 0.2s ease-in;
   color: #fff;
   justify-self: center;
   align-self: center;
