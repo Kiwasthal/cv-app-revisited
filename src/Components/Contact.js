@@ -4,6 +4,7 @@ const Contact = () => {
   return (
     <StyledContactContainer>
       <StyledContactHeader>CONTACT</StyledContactHeader>
+      <StyledSectionsWrapper />
     </StyledContactContainer>
   );
 };
@@ -23,6 +24,11 @@ const StyledContactHeader = styled.h2`
   padding: 5px 3px;
   border-radius: 15px;
   border: 4px solid ${props => props.theme.main};
+`;
+
+const StyledSectionsWrapper = styled.div`
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
 `;
 
 export default Contact;
