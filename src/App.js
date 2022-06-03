@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Title from './Components/Title';
 import Contact from './Components/Contact';
+import SKills from './Components/Skills';
 
 function App() {
   const [theme, setTheme] = useState({
@@ -47,6 +48,7 @@ function App() {
         <Title />
         <Partition />
         <Contact />
+        <SKills />
       </ThemeProvider>
     </div>
   );

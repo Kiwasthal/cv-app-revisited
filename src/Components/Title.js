@@ -1,30 +1,25 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import useHover from './Hover';
 
 const Title = props => {
   const header = useInput('Steerpike');
   const subHeader = useInput('Learning React');
-  const [hovered, setHovered] = useState(false);
-
-  const hoverHandler = () => (hovered ? setHovered(false) : setHovered(true));
+  const [hovered, isHovered] = useHover(false);
 
   return (
     <StyledTitle>
       <StyledImageHolder />
-      <StyledHeaderModal>
-        {hovered ? (
-          <StyledHeaderInput {...header} onMouseLeave={hoverHandler} />
+      <StyledHeaderModal ref={hovered}>
+        {isHovered ? (
+          <StyledHeaderInput {...header} />
         ) : (
-          <StyledMainHeader onMouseEnter={hoverHandler}>
-            {header['value']}
-          </StyledMainHeader>
+          <StyledMainHeader>{header['value']}</StyledMainHeader>
         )}
-        {hovered ? (
-          <StyledSubHeaderInput {...subHeader} onMouseLeave={hoverHandler} />
+        {isHovered ? (
+          <StyledSubHeaderInput {...subHeader} />
         ) : (
-          <StyledSubHeader onMouseEnter={hoverHandler}>
-            {subHeader['value']}
-          </StyledSubHeader>
+          <StyledSubHeader>{subHeader['value']}</StyledSubHeader>
         )}
       </StyledHeaderModal>
     </StyledTitle>
@@ -88,15 +83,29 @@ const StyledSubHeader = styled.h2`
 `;
 
 const StyledHeaderInput = styled.input`
-  color: white;
-  grid-area: 2 / 2 / 3 / 3;
+  align-self: center;
+  grid-area: 2 / 2 / 3 /3;
+  width: 90%;
   height: 50%;
-  text-align: start;
-  background-color: black;
+  align-self: center;
+  background-color: ${props => props.theme.secondary};
+  color: ${props => props.theme.main};
+  font-size: 18px;
+  outline: none;
+  border: 1px solid ${props => props.theme.secondary};
+  transition: all 0.2s ease-in;
+  &:hover {
+    border: 1px solid #fff;
+    &:focus {
+      padding: 4px;
+      transform: scale(1.1);
+    }
+  }
 `;
 
 const StyledSubHeaderInput = styled(StyledHeaderInput)`
   grid-area: 3 / 2 / 4 /3;
+  align-self: flex-start;
 `;
 
 export default Title;

@@ -1,11 +1,12 @@
 import styled, { ThemeContext } from 'styled-components';
-import { useState, useRef, useCallback, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot,
   faGlobe,
   faPhone,
 } from '@fortawesome/free-solid-svg-icons';
+import useHover from './Hover';
 
 const Contact = () => {
   const addressMain = useInput("123 Athen's street");
@@ -113,33 +114,6 @@ const useInput = initialValue => {
   };
 };
 
-function useHover() {
-  const [value, setValue] = useState(false);
-
-  const handleMouseOver = useCallback(() => setValue(true), []);
-  const handleMouseOut = useCallback(() => setValue(false), []);
-  const ref = useRef();
-
-  const callbackRef = useCallback(
-    node => {
-      if (ref.current) {
-        ref.current.removeEventListener('mouseover', handleMouseOver);
-        ref.current.removeEventListener('mouseout', handleMouseOut);
-      }
-
-      ref.current = node;
-
-      if (ref.current) {
-        ref.current.addEventListener('mouseover', handleMouseOver);
-        ref.current.addEventListener('mouseout', handleMouseOut);
-      }
-    },
-    [handleMouseOver, handleMouseOut]
-  );
-
-  return [callbackRef, value];
-}
-
 const StyledContactContainer = styled.div`
   display: grid;
   grid-template-rows: 20% 1fr;
@@ -205,7 +179,7 @@ const StyledInput = styled.input`
   border: 1px solid ${props => props.theme.main};
   transition: all 0.2s ease-in;
   &:hover {
-    border: 1px solid black;
+    border: 1px solid #fff;
     &:focus {
       padding: 4px;
       transform: scale(1.1);
