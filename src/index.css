@@ -27,6 +27,6 @@ code {
   grid-template-columns: 60% 40%;
   grid-template-areas:
     'title title'
-    'education contact'
-    'experience skills';
+    'segments contact'
+    'segments skills';
 }

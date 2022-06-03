@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Title from './Components/Title';
 import Contact from './Components/Contact';
 import Skills from './Components/Skills';
+import SegmentDisplayer from './Components/EduAndExpSegments';
 
 function App() {
   const [theme, setTheme] = useState({
@@ -50,6 +51,7 @@ function App() {
         <Partition />
         <Contact />
         <Skills />
+        <SegmentDisplayer />
       </ThemeProvider>
     </div>
   );

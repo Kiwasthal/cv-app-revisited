@@ -108,6 +108,7 @@ const SkillBox = styled.div`
 `;
 
 const SkillName = styled.h3`
+  transition: all 0.2s ease-in;
   margin: 0;
   padding: 0;
   color: ${props => props.theme.main};
@@ -121,6 +122,7 @@ const SkillPercentageWrapper = styled.div`
 `;
 
 const SkillPercentage = styled.div`
+  transition: all 0.2s ease-in;
   border-radius: 10px;
   height: 100%;
   background-color: ${props => props.theme.main};
