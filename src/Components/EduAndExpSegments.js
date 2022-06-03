@@ -55,6 +55,8 @@ const SegmentDisplayer = () => {
 const useSegments = initialValue => {
   const [value, setValue] = useState(initialValue);
 
+  const [SegmentHovered, isSegmentHovered] = useHover(false);
+
   const addSegment = segment =>
     setValue(prevSegments => [...prevSegments, segment]);
 
@@ -62,13 +64,18 @@ const useSegments = initialValue => {
     setValue(value.filter(segment => segment.id !== remove.id));
 
   const displaySegments = value.map(segment => (
-    <SegmentBox key={segment.id}>
+    <SegmentBox key={segment.id} ref={SegmentHovered}>
       {segment.first}
-      <button
-        onClick={() => {
-          removeSegment(segment);
-        }}
-      ></button>
+      <button></button>
+      {isSegmentHovered ? (
+        <RemoveButton
+          onClick={() => {
+            removeSegment(segment);
+          }}
+        >
+          Remove
+        </RemoveButton>
+      ) : null}
     </SegmentBox>
   ));
 
@@ -140,13 +147,19 @@ const AddButton = styled.button`
   }
 `;
 
+const RemoveButton = styled(AddButton)`
+  font-size: 8px;
+`;
+
 const SegmentsContainer = styled.div`
   grid-area: 2 / 1 / 3 / 3;
 `;
 
 const SegmentBox = styled.div`
-  background-color: red;
+  display: grid;
+  grid-template-columns: 20% 30% 1fr;
   height: 20%;
+  position: relative;
 `;
 
 export default SegmentDisplayer;
