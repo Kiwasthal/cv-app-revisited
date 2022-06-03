@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import useHover from './Hover';
+import SegmentsForm from './SegmentsForm';
 
 const SegmentDisplayer = () => {
-  const [expSegments, setExpSegments] = useState([]);
-  const [eduSegments, setEduSegments] = useState([]);
+  const expSegs = useSegments([]);
+  const startingValues = { first: '', second: '', third: '', fourth: '' };
+
   const [educationHovered, isEducationHovered] = useHover(false);
   const [experienceHovered, isExperienceHovered] = useHover(false);
 
@@ -18,17 +20,42 @@ const SegmentDisplayer = () => {
         {isEducationHovered ? (
           <AddButton {...eduFormHandler}>ADD</AddButton>
         ) : null}
-        {eduFormHandler.active ? <button>Hey</button> : null}
+        {eduFormHandler.active ? (
+          <SegmentsForm
+            formHandling={eduFormHandler}
+            addSegment={expSegs.addSegment}
+            values={startingValues}
+          />
+        ) : null}
+        <SegmentsContainer>{expSegs.displaySegments}</SegmentsContainer>
       </Wrapper>
       <Wrapper ref={experienceHovered}>
         <WrapperHeader>EXPERIENCE</WrapperHeader>
         {isExperienceHovered ? (
           <AddButton {...expFormHandler}>ADD</AddButton>
         ) : null}
-        {expFormHandler.active ? <button>Hey</button> : null}
+        {expFormHandler.active ? <SegmentsForm /> : null}
+        <SegmentsContainer />
       </Wrapper>
     </SegmentsWrapper>
   );
+};
+
+const useSegments = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  const addSegment = segment =>
+    setValue(prevSegments => [...prevSegments, segment]);
+
+  const displaySegments = value.map(segment => (
+    <SegmentBox key={segment.id}>{segment.first}</SegmentBox>
+  ));
+
+  return {
+    value,
+    addSegment,
+    displaySegments,
+  };
 };
 
 const useForm = initialValue => {
@@ -54,6 +81,7 @@ const Wrapper = styled.div`
 `;
 
 const WrapperHeader = styled.div`
+  grid-area: 1 / 1 / 2 / 2;
   transition: all 0.2s ease-in;
   color: #fff;
   text-shadow: 3px 2px 3px ${props => props.theme.secondary};
@@ -89,6 +117,15 @@ const AddButton = styled.button`
       transform: translateY(4px);
     }
   }
+`;
+
+const SegmentsContainer = styled.div`
+  grid-area: 2 / 1 / 3 / 3;
+`;
+
+const SegmentBox = styled.div`
+  background-color: red;
+  height: 20%;
 `;
 
 export default SegmentDisplayer;
