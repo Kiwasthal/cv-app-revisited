@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { useState, useRef, useCallback } from 'react';
+import styled, { ThemeContext } from 'styled-components';
+import { useState, useRef, useCallback, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot,
@@ -18,6 +18,9 @@ const Contact = () => {
   const [webHover, isWebHovered] = useHover(false);
   const [phoneHover, isPhoneHovered] = useHover(false);
 
+  const themeContext = useContext(ThemeContext);
+  console.log(themeContext);
+
   return (
     <StyledContactContainer>
       <StyledContactHeader>CONTACT</StyledContactHeader>
@@ -31,6 +34,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '40px',
+              color: `${themeContext.main}`,
             }}
           />
           {isAddressHovered ? (
@@ -39,7 +43,7 @@ const Contact = () => {
             <UpperText>{addressMain['value']}</UpperText>
           )}
           {isAddressHovered ? (
-            <input {...addressSecondary} />
+            <StyledInput {...addressSecondary} />
           ) : (
             <BottomText>{addressSecondary['value']}</BottomText>
           )}
@@ -53,6 +57,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '40px',
+              color: `${themeContext.main}`,
             }}
           />
           {isWebHovered ? (
@@ -61,7 +66,7 @@ const Contact = () => {
             <UpperText>{webMain['value']}</UpperText>
           )}
           {isWebHovered ? (
-            <input {...webSecondary} />
+            <StyledInput {...webSecondary} />
           ) : (
             <BottomText>{webSecondary['value']}</BottomText>
           )}
@@ -75,6 +80,7 @@ const Contact = () => {
               justifySelf: 'center',
               alignSelf: 'center',
               height: '35px',
+              color: `${themeContext.main}`,
             }}
           />
           {isPhoneHovered ? (
@@ -83,7 +89,7 @@ const Contact = () => {
             <UpperText>{phoneMain['value']}</UpperText>
           )}
           {isPhoneHovered ? (
-            <input {...phoneSecondary} />
+            <StyledInput {...phoneSecondary} />
           ) : (
             <BottomText>{phoneSecondary['value']}</BottomText>
           )}
@@ -135,7 +141,6 @@ const StyledContactContainer = styled.div`
   display: grid;
   grid-template-rows: 20% 1fr;
   grid-area: 2 / 2 / 3 / 3;
-  border: 1px solid black;
   z-index: 1001;
 `;
 
@@ -188,6 +193,20 @@ const BottomText = styled(UpperText)`
 const StyledInput = styled.input`
   width: 90%;
   height: 50%;
+  align-self: center;
+  background-color: ${props => props.theme.main};
+  color: ${props => props.theme.secondary};
+  font-size: 14px;
+  outline: none;
+  border: 1px solid ${props => props.theme.main};
+  transition: all 0.2s ease-in;
+  &:hover {
+    border: 1px solid black;
+    &:focus {
+      padding: 4px;
+      transform: scale(1.1);
+    }
+  }
 `;
 
 export default Contact;

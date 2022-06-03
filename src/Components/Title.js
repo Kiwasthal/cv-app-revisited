@@ -64,7 +64,7 @@ const StyledImageHolder = styled.div`
   grid-area: 2 / 2 / 3 / 4;
   border: 10px solid black;
   z-index: 1001;
-  background-color: yellow;
+  background-color: ${props => props.theme.secondary};
 `;
 
 const StyledMainHeader = styled.h1`
