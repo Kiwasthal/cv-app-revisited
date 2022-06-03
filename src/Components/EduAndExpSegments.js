@@ -5,7 +5,10 @@ import SegmentsForm from './SegmentsForm';
 
 const SegmentDisplayer = () => {
   const expSegs = useSegments([]);
+  const eduSegs = useSegments([]);
   const startingValues = { first: '', second: '', third: '', fourth: '' };
+  const eduLabels = ['FROM-TO', 'DEGREE', 'UNIVERSITY', 'DESCRIPTION'];
+  const expLabels = ['FROM-TO', 'COMPANY', 'POSITION', 'DESCRIPTION'];
 
   const [educationHovered, isEducationHovered] = useHover(false);
   const [experienceHovered, isExperienceHovered] = useHover(false);
@@ -23,19 +26,27 @@ const SegmentDisplayer = () => {
         {eduFormHandler.active ? (
           <SegmentsForm
             formHandling={eduFormHandler}
-            addSegment={expSegs.addSegment}
+            addSegment={eduSegs.addSegment}
             values={startingValues}
+            labels={eduLabels}
           />
         ) : null}
-        <SegmentsContainer>{expSegs.displaySegments}</SegmentsContainer>
+        <SegmentsContainer>{eduSegs.displaySegments}</SegmentsContainer>
       </Wrapper>
       <Wrapper ref={experienceHovered}>
         <WrapperHeader>EXPERIENCE</WrapperHeader>
         {isExperienceHovered ? (
           <AddButton {...expFormHandler}>ADD</AddButton>
         ) : null}
-        {expFormHandler.active ? <SegmentsForm /> : null}
-        <SegmentsContainer />
+        {expFormHandler.active ? (
+          <SegmentsForm
+            formHandling={expFormHandler}
+            addSegment={expSegs.addSegment}
+            values={startingValues}
+            labels={expLabels}
+          />
+        ) : null}
+        <SegmentsContainer>{expSegs.displaySegments}</SegmentsContainer>
       </Wrapper>
     </SegmentsWrapper>
   );
@@ -47,8 +58,18 @@ const useSegments = initialValue => {
   const addSegment = segment =>
     setValue(prevSegments => [...prevSegments, segment]);
 
+  const removeSegment = remove =>
+    setValue(value.filter(segment => segment.id !== remove.id));
+
   const displaySegments = value.map(segment => (
-    <SegmentBox key={segment.id}>{segment.first}</SegmentBox>
+    <SegmentBox key={segment.id}>
+      {segment.first}
+      <button
+        onClick={() => {
+          removeSegment(segment);
+        }}
+      ></button>
+    </SegmentBox>
   ));
 
   return {

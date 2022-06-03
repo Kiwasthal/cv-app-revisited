@@ -23,6 +23,7 @@ const SegmentsForm = props => {
   return (
     <Form>
       <CloseForm {...props.formHandling}>+</CloseForm>
+      <label>{props.labels[0]}</label>
       <input {...firstInput} />
       <button onClick={submitInput}>Add</button>
     </Form>
