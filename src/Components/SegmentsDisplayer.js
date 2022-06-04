@@ -8,6 +8,7 @@ const SegmentsDisplayer = props => {
   const { origin, removeOrigin, originIndex, editOrigin } = props;
 
   const formHandler = useForm(false);
+  console.log(formHandler.active);
 
   const handleRemove = () => removeOrigin(origin);
 
