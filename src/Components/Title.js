@@ -6,10 +6,32 @@ const Title = props => {
   const header = useInput('Steerpike');
   const subHeader = useInput('Learning React');
   const [hovered, isHovered] = useHover(false);
+  const [imagehovered, isImageHovered] = useHover(false);
+  const [image, setImage] = useState(null);
+
+  const ImageChange = e => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setImage(URL.createObjectURL(img));
+    }
+  };
 
   return (
     <StyledTitle>
-      <StyledImageHolder />
+      <StyledImageHolder
+        style={{ backgroundImage: `url(${image})` }}
+        ref={imagehovered}
+      >
+        {isImageHovered ? (
+          <ImgLabel htmlFor="img">Upload Image</ImgLabel>
+        ) : null}
+        <input
+          id="img"
+          type="file"
+          onChange={ImageChange}
+          style={{ display: 'none' }}
+        />
+      </StyledImageHolder>
       <StyledHeaderModal ref={hovered}>
         {isHovered ? (
           <StyledHeaderInput {...header} />
@@ -62,6 +84,8 @@ const StyledImageHolder = styled.div`
   border: 10px solid black;
   z-index: 1001;
   background-color: ${props => props.theme.secondary};
+  position: relative;
+  background-size: 100%;
 `;
 
 const StyledMainHeader = styled.h1`
@@ -106,6 +130,19 @@ const StyledHeaderInput = styled.input`
 const StyledSubHeaderInput = styled(StyledHeaderInput)`
   grid-area: 3 / 2 / 4 /3;
   align-self: flex-start;
+`;
+
+const ImgLabel = styled.label`
+  position: absolute;
+  left: 23%;
+  font-weight: 600;
+  box-shadow: 0px 3px 5px black;
+  top: 40%;
+  cursor: pointer;
+  background-color: ${props => props.theme.main};
+  color: #fff;
+  padding: 10px 5px;
+  border: 3px solid black;
 `;
 
 export default Title;
