@@ -4,9 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # About
 
+<img src='./src/Assets/ImageCollage.jpg' alt='Showcase'>
+
 This is a revisit of the original design of the CV-application built with different React Hooks . The intention is rebuilding the whole application with functional components , using as many new techniques as possible. Press <u>Space</u> to toggle between various themes.
 
---><a href="">Project Demo</a>
+--><a href="https://kiwasthal.github.io/cv-app-revisited/">Project Demo</a>!
 
 # Notes
 
