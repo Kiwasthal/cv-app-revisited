@@ -47,8 +47,8 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Title />
         <Partition />
+        <Title />
         <Contact />
         <Skills />
         <SegmentControl />

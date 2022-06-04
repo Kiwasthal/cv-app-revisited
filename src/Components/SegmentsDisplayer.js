@@ -85,7 +85,7 @@ const SegmentDegree = styled.p`
 const SegmentUniversity = styled.p`
   grid-area: 1 / 3 / 2 / 4;
   align-self: flex-end;
-  justify-self: flex-start;
+  justify-self: center;
   font-size: 14px;
   font-weight: 500;
   margin: 0;
