@@ -15,6 +15,12 @@ const SegmentsForm = props => {
       second: secondInput.value,
       third: thirdInput.value,
       fourth: fourthInput.value,
+      names: [
+        props.labels[0],
+        props.labels[1],
+        props.labels[2],
+        props.labels[3],
+      ],
       id: id,
     });
     props.formHandling.onClick();
@@ -23,9 +29,23 @@ const SegmentsForm = props => {
   return (
     <Form>
       <CloseForm {...props.formHandling}>+</CloseForm>
-      <label>{props.labels[0]}</label>
-      <input {...firstInput} />
-      <button onClick={submitInput}>Add</button>
+      <InputWrapper>
+        <InputHeader>{props.labels[0]}</InputHeader>
+        <FormInput {...firstInput} />
+      </InputWrapper>
+      <InputWrapper>
+        <InputHeader>{props.labels[1]}</InputHeader>
+        <FormInput {...secondInput} />
+      </InputWrapper>
+      <InputWrapper>
+        <InputHeader>{props.labels[2]}</InputHeader>
+        <FormInput {...thirdInput} />
+      </InputWrapper>
+      <InputWrapper>
+        <InputHeader>{props.labels[3]}</InputHeader>
+        <FormInput {...fourthInput} />
+      </InputWrapper>
+      <CreateButton onClick={submitInput}>Add</CreateButton>
     </Form>
   );
 };
@@ -55,6 +75,11 @@ const Form = styled.div`
   width: 80%;
   background-color: ${props => props.theme.main};
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px;
 `;
 
 const CloseForm = styled.div`
@@ -69,5 +94,51 @@ const CloseForm = styled.div`
   &:hover {
     transform: scale(1.3) rotate(45deg);
     color: #fff;
+  }
+`;
+
+const FormInput = styled.input`
+  max-width: 100%;
+  height: 100%;
+  background-color: ${props => props.theme.secondary};
+  color: ${props => props.theme.main};
+  font-size: 14px;
+  outline: none;
+  border: 1px solid ${props => props.theme.secondary};
+  transition: all 0.2s ease-in;
+  &:hover {
+    border: 1px solid #fff;
+    &:focus {
+      padding: 4px;
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const InputHeader = styled.h5`
+  margin: 0;
+  color: ${props => props.theme.secondary};
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CreateButton = styled.button`
+  padding: 8px 5px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  outline: none;
+  width: 50%;
+  border-radius: 5px;
+  transition: all 0.2s ease-in;
+  background-color: ${props => props.theme.secondary};
+  color: ${props => props.theme.main};
+  &:hover {
+    color: ${props => props.theme.secondary};
+    background-color: #fff;
   }
 `;

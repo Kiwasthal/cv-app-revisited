@@ -167,7 +167,7 @@ const BottomText = styled(UpperText)`
 `;
 
 const StyledInput = styled.input`
-  width: 90%;
+  max-width: 90%;
   height: 50%;
   align-self: center;
   background-color: ${props => props.theme.main};

@@ -73,7 +73,7 @@ const InputWrappers = styled.div`
 `;
 
 const FormInput = styled.input`
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   background-color: ${props => props.theme.secondary};
   color: ${props => props.theme.main};

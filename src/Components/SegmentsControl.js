@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import useHover from './Hover';
 import SegmentsForm from './SegmentsForm';
+import SegmentsDisplayer from './SegmentsDisplayer';
 
-const SegmentDisplayer = () => {
+const SegmentControl = () => {
   const expSegs = useSegments([]);
   const eduSegs = useSegments([]);
   const startingValues = { first: '', second: '', third: '', fourth: '' };
@@ -55,28 +56,31 @@ const SegmentDisplayer = () => {
 const useSegments = initialValue => {
   const [value, setValue] = useState(initialValue);
 
-  const [SegmentHovered, isSegmentHovered] = useHover(false);
-
   const addSegment = segment =>
     setValue(prevSegments => [...prevSegments, segment]);
+
+  const editSegment = (index, newFirst, newSecond, newThird, newFourth) => {
+    let segments = [...value];
+    let segment = { ...segments[index] };
+    segment.first = newFirst;
+    segment.second = newSecond;
+    segment.third = newThird;
+    segment.fourth = newFourth;
+    segments[index] = segment;
+    setValue(segments);
+  };
 
   const removeSegment = remove =>
     setValue(value.filter(segment => segment.id !== remove.id));
 
-  const displaySegments = value.map(segment => (
-    <SegmentBox key={segment.id} ref={SegmentHovered}>
-      {segment.first}
-      <button></button>
-      {isSegmentHovered ? (
-        <RemoveButton
-          onClick={() => {
-            removeSegment(segment);
-          }}
-        >
-          Remove
-        </RemoveButton>
-      ) : null}
-    </SegmentBox>
+  const displaySegments = value.map((segment, index) => (
+    <SegmentsDisplayer
+      key={segment.id}
+      origin={segment}
+      removeOrigin={removeSegment}
+      originIndex={index}
+      editOrigin={editSegment}
+    />
   ));
 
   return {
@@ -147,19 +151,8 @@ const AddButton = styled.button`
   }
 `;
 
-const RemoveButton = styled(AddButton)`
-  font-size: 8px;
-`;
-
 const SegmentsContainer = styled.div`
   grid-area: 2 / 1 / 3 / 3;
 `;
 
-const SegmentBox = styled.div`
-  display: grid;
-  grid-template-columns: 20% 30% 1fr;
-  height: 20%;
-  position: relative;
-`;
-
-export default SegmentDisplayer;
+export default SegmentControl;
